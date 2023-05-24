@@ -1,0 +1,32 @@
+{
+	"info": {
+		"_postman_id": "52cee654-f903-4557-8b60-d1c0fb4d6b76",
+		"name": "ScrapeWatch",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Scrape",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{scrapewatch-api-base-url}}-base-/scrape?url={{$randomUrl}}",
+					"host": [
+						"{{scrapewatch-api-base-url}}-base-"
+					],
+					"path": [
+						"scrape"
+					],
+					"query": [
+						{
+							"key": "url",
+							"value": "{{$randomUrl}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
