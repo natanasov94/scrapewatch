@@ -11,7 +11,7 @@ COPY gradle gradle
 COPY gradlew .
 RUN ./gradlew --version
 COPY src/ src/
-RUN ./gradlew build
+RUN ./gradlew clean build
 
 COPY ./build/libs/ScrapeWatch-0.0.1-SNAPSHOT.jar /app/app.jar
 EXPOSE 8080
