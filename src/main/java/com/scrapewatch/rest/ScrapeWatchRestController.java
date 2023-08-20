@@ -1,4 +1,4 @@
-package com.scraper.webcrawler.rest;
+package com.scrapewatch.rest;
 
 import java.io.IOException;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.scraper.webcrawler.crawl.Crawler;
-import com.scraper.webcrawler.dto.CrawledPageDTO;
-import com.scraper.webcrawler.dto.ScrapedPageDTO;
-import com.scraper.webcrawler.scrape.Scraper;
+import com.scrapewatch.crawl.Crawler;
+import com.scrapewatch.dto.CrawledPageDTO;
+import com.scrapewatch.dto.ScrapedPageDTO;
+import com.scrapewatch.scrape.Scraper;
 
 import lombok.RequiredArgsConstructor;
 

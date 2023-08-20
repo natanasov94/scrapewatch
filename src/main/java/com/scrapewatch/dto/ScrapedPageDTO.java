@@ -1,4 +1,4 @@
-package com.scraper.webcrawler.dto;
+package com.scrapewatch.dto;
 
 import lombok.Builder;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package com.scraper.webcrawler.scrape;
+package com.scrapewatch.scrape;
 
 import java.io.IOException;
 
@@ -6,7 +6,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.springframework.stereotype.Service;
 
-import com.scraper.webcrawler.dto.ScrapedPageDTO;
+import com.scrapewatch.dto.ScrapedPageDTO;
 
 import lombok.extern.log4j.Log4j2;
 

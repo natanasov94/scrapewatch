@@ -1,4 +1,4 @@
-package com.scraper.webcrawler.dto;
+package com.scrapewatch.dto;
 
 import java.util.List;
 

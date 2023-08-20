@@ -1,4 +1,4 @@
-package com.scraper.webcrawler;
+package com.scrapewatch;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

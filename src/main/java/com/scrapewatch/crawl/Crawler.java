@@ -1,4 +1,4 @@
-package com.scraper.webcrawler.crawl;
+package com.scrapewatch.crawl;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
-import com.scraper.webcrawler.dto.CrawledPageDTO;
+import com.scrapewatch.dto.CrawledPageDTO;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -18,7 +18,7 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class Crawler {
 
-    private final List<String> INVALID_URLS = List.of("", "#.*", "/");
+    private final List<String> INVALID_URLS = List.of("", "#.*", "/", "/#");
 
     public CrawledPageDTO crawl(String baseUrl) throws IOException {
         List<String> childPages = new ArrayList<>();
