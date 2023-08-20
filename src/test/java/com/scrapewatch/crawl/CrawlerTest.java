@@ -1,4 +1,4 @@
-package com.crawl;
+package com.scrapewatch.crawl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -7,7 +7,6 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.scrapewatch.crawl.Crawler;
 import com.scrapewatch.dto.CrawledPageDTO;
 import com.scrapewatch.jsoup.JsoupConnection;
 
