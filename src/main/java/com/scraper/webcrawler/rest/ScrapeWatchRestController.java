@@ -1,25 +1,40 @@
 package com.scraper.webcrawler.rest;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import lombok.extern.log4j.Log4j2;
+import com.scraper.webcrawler.crawl.Crawler;
+import com.scraper.webcrawler.dto.CrawledPagesDTO;
+import com.scraper.webcrawler.dto.ScrapedPageDTO;
+import com.scraper.webcrawler.scrape.Scraper;
+
+import lombok.RequiredArgsConstructor;
 
 @RestController
-@Log4j2
+@RequiredArgsConstructor
 public class ScrapeWatchRestController {
 
-    @GetMapping("/scrape")
-    public String testCall(@RequestParam String url) throws IOException {
-        log.info("Attempting to scrape title from: " + url);
-        Document doc = Jsoup.connect(url).get();
-        String title = doc.title();
-        return "Title: " + title;
+    private final Crawler crawler;
+    private final Scraper scraper;
+
+    @GetMapping("/crawl")
+    @ResponseBody
+    public CrawledPagesDTO crawlForChildPages(@RequestParam String url) throws IOException {
+        return crawler.crawl(url);
     }
-    
+
+    @GetMapping("/scrape")
+    @ResponseBody 
+    public ScrapedPageDTO testCall(@RequestParam String url) throws IOException {
+        return scraper.scrape(url);
+    }
 }
