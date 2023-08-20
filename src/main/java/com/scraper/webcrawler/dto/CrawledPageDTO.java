@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class CrawledPagesDTO {
+public class CrawledPageDTO {
     
     private String baseUrl;
     private List<String> childPages;

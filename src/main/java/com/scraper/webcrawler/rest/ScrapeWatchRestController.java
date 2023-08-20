@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.scraper.webcrawler.crawl.Crawler;
-import com.scraper.webcrawler.dto.CrawledPagesDTO;
+import com.scraper.webcrawler.dto.CrawledPageDTO;
 import com.scraper.webcrawler.dto.ScrapedPageDTO;
 import com.scraper.webcrawler.scrape.Scraper;
 
@@ -22,7 +22,7 @@ public class ScrapeWatchRestController {
 
     @GetMapping("/crawl")
     @ResponseBody
-    public CrawledPagesDTO crawlForChildPages(@RequestParam String url) throws IOException {
+    public CrawledPageDTO crawlForChildPages(@RequestParam String url) throws IOException {
         return crawler.crawl(url);
     }
 

@@ -10,42 +10,43 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
-import com.scraper.webcrawler.dto.CrawledPagesDTO;
+import com.scraper.webcrawler.dto.CrawledPageDTO;
 
 import lombok.extern.log4j.Log4j2;
 
 @Service
 @Log4j2
 public class Crawler {
-    
-    private final List<String> INVALID_URLS = List.of("", "/", "/#");
 
-    public CrawledPagesDTO crawl(String baseUrl) throws IOException {
+    private final List<String> INVALID_URLS = List.of("", "#.*", "/");
+
+    public CrawledPageDTO crawl(String baseUrl) throws IOException {
         List<String> childPages = new ArrayList<>();
         log.info("Fetching child pages from " + baseUrl);
         Document document = Jsoup.connect(baseUrl).get();
-        Elements links = document.select("a[href]"); // Select all <a> elements with href attribute
+        Elements links = document.select("a[href]");
 
         for (Element link : links) {
-            String childUrl = link.absUrl("href"); // Get absolute URL of the link
+            String childUrl = link.absUrl("href");
             if (isDesiredChildPage(childUrl, baseUrl)) {
                 log.info("BaseUrl: " + baseUrl + " - Found child: " + childUrl);
                 childPages.add(childUrl);
             }
         }
-        return new CrawledPagesDTO(baseUrl, childPages);
+        return new CrawledPageDTO(baseUrl, childPages);
     }
 
     private boolean isDesiredChildPage(String childUrl, String baseUrl) {
         boolean startsWithBaseUrl = childUrl.startsWith(baseUrl);
-        if (startsWithBaseUrl) {
-            boolean childIsBaseUrl = childUrl.equals(baseUrl);
-            String childUrlSubstring = childUrl.substring(baseUrl.length(), childUrl.length());
-            boolean childIsValidUrl = !INVALID_URLS.contains(childUrlSubstring);
-            return !childIsBaseUrl && childIsValidUrl;
-        } else {
+        if (!startsWithBaseUrl) {
             return false;
         }
+        boolean childIsBaseUrl = childUrl.equals(baseUrl);
+        if (childIsBaseUrl) {
+            return false;
+        }
+        String childUrlSubstring = childUrl.substring(baseUrl.length(), childUrl.length());
+        return INVALID_URLS.stream().noneMatch(childUrlSubstring::matches);
     }
 
 }
