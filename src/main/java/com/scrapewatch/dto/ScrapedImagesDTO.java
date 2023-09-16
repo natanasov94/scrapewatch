@@ -7,9 +7,9 @@ import lombok.Data;
 
 @Data
 @Builder
-public class CrawledPageDTO {
-    
+public class ScrapedImagesDTO {
+
     private String baseUrl;
-    private List<String> childPages;
-    
+    private List<String> images;
+
 }

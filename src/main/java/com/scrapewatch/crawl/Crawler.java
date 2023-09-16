@@ -9,6 +9,7 @@ import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
 import com.scrapewatch.dto.CrawledPageDTO;
+import com.scrapewatch.dto.ScrapedImagesDTO;
 import com.scrapewatch.jsoup.JsoupConnection;
 
 import lombok.RequiredArgsConstructor;
@@ -32,7 +33,7 @@ public class Crawler {
             log.info("BaseUrl: " + url + " - Found child: " + childUrl);
             childPages.add(childUrl);
         }
-        return new CrawledPageDTO(url, childPages);
+        return CrawledPageDTO.builder().baseUrl(url).childPages(childPages).build();
     }
 
 }
