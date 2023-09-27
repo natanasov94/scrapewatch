@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.scrapewatch.crawl.Crawler;
 import com.scrapewatch.dto.CrawledPageDTO;
+import com.scrapewatch.dto.ScrapedEmailsDTO;
 import com.scrapewatch.dto.ScrapedImagesDTO;
 import com.scrapewatch.dto.ScrapedPageDTO;
 import com.scrapewatch.scrape.Scraper;
@@ -40,6 +41,12 @@ public class ScrapeWatchRestController {
     @ResponseBody
     public ScrapedImagesDTO scrapeForImages(@RequestParam String url) throws IOException {
         return scraper.scrapeImages(url);
+    }
+
+    @GetMapping("/scrape/email")
+    @ResponseBody
+    public ScrapedEmailsDTO scrapeForEmails(@RequestParam String url) throws IOException {
+        return scraper.scrapeEmails(url);
     }
 
     @GetMapping("/scrape/imagedisplay")

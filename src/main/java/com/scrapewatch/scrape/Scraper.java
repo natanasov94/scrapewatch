@@ -3,12 +3,15 @@ package com.scrapewatch.scrape;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
+import com.scrapewatch.dto.ScrapedEmailsDTO;
 import com.scrapewatch.dto.ScrapedImagesDTO;
 import com.scrapewatch.dto.ScrapedPageDTO;
 import com.scrapewatch.jsoup.JsoupConnection;
@@ -42,5 +45,20 @@ public class Scraper {
             imageUrls.add(imageUrl);
         }
         return ScrapedImagesDTO.builder().baseUrl(url).images(imageUrls).build();
+    }
+
+    public ScrapedEmailsDTO scrapeEmails(String url) throws IOException {
+        log.info("Scraping emails from: " + url);
+        Document doc = jsoupConnection.establishConnection(url);
+        Elements mailToElements = doc.select("a[href^=mailto]");
+        
+        List<String> emails = new ArrayList<>();
+        for (Element mailToElement : mailToElements) {
+            String href = mailToElement.attr("href");
+            String email = href.substring("mailto:".length());
+            log.info("BaseUrl: " + url + " - Found email: " + email);
+            emails.add(email);
+        }
+        return ScrapedEmailsDTO.builder().baseUrl(url).emails(emails).build();
     }
 }
