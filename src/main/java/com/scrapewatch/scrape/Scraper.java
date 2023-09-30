@@ -1,14 +1,17 @@
 package com.scrapewatch.scrape;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.stereotype.Service;
 
 import com.scrapewatch.dto.ScrapedEmailsDTO;
@@ -49,9 +52,9 @@ public class Scraper {
 
     public ScrapedEmailsDTO scrapeEmails(String url) throws IOException {
         log.info("Scraping emails from: " + url);
-        Document doc = jsoupConnection.establishConnection(url);
+        Document doc = jsoupConnection.establishConnectionAndLoadJavascript(url);
         Elements mailToElements = doc.select("a[href^=mailto]");
-        
+
         List<String> emails = new ArrayList<>();
         for (Element mailToElement : mailToElements) {
             String href = mailToElement.attr("href");
